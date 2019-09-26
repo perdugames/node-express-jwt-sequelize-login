@@ -177,7 +177,7 @@ describe("API Test", () => {
   
   it("/user/update-password New password required", (done) => {
     chai.request(app)
-    .post("/user/update-password")
+    .put("/user/update-password")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .send({password: Encryption.decrypt(user.dataValues.password)})
@@ -190,7 +190,7 @@ describe("API Test", () => {
   
   it("/user/update-password Password required", (done) => {
     chai.request(app)
-    .post("/user/update-password")
+    .put("/user/update-password")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .send({
@@ -205,7 +205,7 @@ describe("API Test", () => {
   
   it("/user/update-password Incorrect password", (done) => {
     chai.request(app)
-    .post("/user/update-password")
+    .put("/user/update-password")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .send({
@@ -221,7 +221,7 @@ describe("API Test", () => {
   
   it("/user/update-password success", (done) => {
     chai.request(app)
-    .post("/user/update-password")
+    .put("/user/update-password")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .send({
@@ -262,7 +262,7 @@ describe("API Test", () => {
   
   it("/user/reset-password-update New password required", function(done) {
     chai.request(app)
-    .post("/user/reset-password-update")
+    .put("/user/reset-password-update")
     .type("json")
     .send({resetPasswordToken: userResetPasswordOne.dataValues.jwt})
     .end(function(err, res) {
@@ -274,7 +274,7 @@ describe("API Test", () => {
   
   it("/user/reset-password-update Reset password token required", function(done) {
     chai.request(app)
-    .post("/user/reset-password-update")
+    .put("/user/reset-password-update")
     .type("json")
     .send({newPassword: "newPassword123"})
     .end(function(err, res) {
@@ -286,7 +286,7 @@ describe("API Test", () => {
   
   it("/user/reset-password-update Reset password token doesn't exist", function(done) {
     chai.request(app)
-    .post("/user/reset-password-update")
+    .put("/user/reset-password-update")
     .type("json")
     .send({newPassword: "newPassword123", resetPasswordToken: userResetPasswordOne.dataValues.jwt + "BUG"})
     .end(function(err, res) {
@@ -298,7 +298,7 @@ describe("API Test", () => {
   
   it("/user/reset-password-update Invalid token", function(done) {
     chai.request(app)
-    .post("/user/reset-password-update")
+    .put("/user/reset-password-update")
     .type("json")
     .send({newPassword: "newPassword123", resetPasswordToken: userResetPasswordInvalid.dataValues.jwt})
     .end(function(err, res) {
@@ -310,7 +310,7 @@ describe("API Test", () => {
   
   it("/user/reset-password-update success", function(done) {
     chai.request(app)
-    .post("/user/reset-password-update")
+    .put("/user/reset-password-update")
     .type("json")
     .send({newPassword: "newPassword123", resetPasswordToken: userResetPasswordOne.dataValues.jwt})
     .end(function(err, res) {
@@ -322,7 +322,7 @@ describe("API Test", () => {
   
   it("/user/delete Password required", function(done) {
     chai.request(app)
-    .post("/user/delete")
+    .delete("/user/delete")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .end(function(err, res) {
@@ -334,7 +334,7 @@ describe("API Test", () => {
   
   it("/user/delete Authorization token required", function(done) {
     chai.request(app)
-    .post("/user/delete")
+    .delete("/user/delete")
     .type("json")
     .send({password: Encryption.decrypt(user.dataValues.password)})
     .end(function(err, res) {
@@ -346,7 +346,7 @@ describe("API Test", () => {
   
   it("/user/delete Invalid token", function(done) {
     chai.request(app)
-    .post("/user/delete")
+    .delete("/user/delete")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt + "BUG")
     .send({password: Encryption.decrypt(user.dataValues.password)})
@@ -359,7 +359,7 @@ describe("API Test", () => {
   
   it("/user/delete success", function(done) {
     chai.request(app)
-    .post("/user/delete")
+    .delete("/user/delete")
     .type("json")
     .set("authorization", "Bearer " + userSessionOne.dataValues.jwt)
     .send({password: Encryption.decrypt(user.dataValues.password)})

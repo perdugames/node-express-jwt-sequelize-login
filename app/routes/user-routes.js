@@ -50,7 +50,7 @@ router.post('/logout', auth, (req, res) => {
   .catch(() => res.status(400).json({status: 400, message: "Logout failed."}))    
 })
 
-router.postAsync('/update-password', auth, async (req, res, next) => {
+router.putAsync('/update-password', auth, async (req, res, next) => {
   if(!req.body.newPassword)
     res.status(400).json({status: 400, message: "New password required."})
   const user = await verifyPassword(req, res, {id: res.jwtDecoded.userId})
@@ -76,7 +76,7 @@ router.postAsync('/reset-password', async (req, res, next) => {
   res.status(200).json({status: 200, message: "Reset password success."})
 })
 
-router.postAsync('/reset-password-update', async (req, res, next) => {
+router.putAsync('/reset-password-update', async (req, res, next) => {
   if(!req.body.newPassword)
     res.status(400).json({status: 400, message: "New password required."})
   if(!req.body.resetPasswordToken)
@@ -96,7 +96,7 @@ router.postAsync('/reset-password-update', async (req, res, next) => {
   res.status(200).json({status: 200, message: "Password updated success."})
 })
 
-router.postAsync('/delete', auth, async (req, res, next) => {
+router.deleteAsync('/delete', auth, async (req, res, next) => {
   if(!req.body.password)
     res.status(401).json({status: 401, message: "Password required."})
   const user = await verifyPassword(req, res, {id: res.jwtDecoded.userId})
